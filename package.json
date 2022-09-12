@@ -2,7 +2,7 @@
   "name": "daivoka-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "dev:tsc": "ttsc --watch -p .",
     "dev:serve": "nodemon -r dotenv/config -e js -w lib lib/index.js",

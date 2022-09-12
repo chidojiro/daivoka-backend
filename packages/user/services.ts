@@ -6,7 +6,11 @@ const create = (data: CreateUserPayload) => {
 };
 
 const getByEmail = (email: string) => {
-  return UserModel.findOne({ email });
+  return UserModel.findOne({ email }).exec();
 };
 
-export const UserServices = { create, getByEmail };
+const getById = (_id: string) => {
+  return UserModel.findOne({ _id }).exec();
+};
+
+export const UserServices = { create, getByEmail, getById };

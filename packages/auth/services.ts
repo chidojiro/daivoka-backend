@@ -12,34 +12,38 @@ const register = async (payload: CreateUserPayload) => {
   const existingUser = await UserServices.getByEmail(payload.email);
 
   if (existingUser) {
-    return Boom.badRequest('User already exists');
+    throw Boom.badRequest('User already exists');
   }
 
   const encryptedPassword = bcrypt.hashSync(payload.password, SALT_ROUNDS);
 
-  const newUser = await UserServices.create({ email: payload.email, password: encryptedPassword });
+  const { password, ...newUser } = await (
+    await UserServices.create({ email: payload.email, password: encryptedPassword })
+  ).toObject();
 
-  return newUser;
+  const accessToken = jwt.sign(newUser, JWT_SECRET);
+
+  return { accessToken, ...newUser };
 };
 
 const login = async (payload: LoginPayload) => {
   const existingUser = await UserServices.getByEmail(payload.email);
 
   if (!existingUser) {
-    return Boom.notFound('User not found');
+    throw Boom.notFound('User not found');
   }
 
   const isPasswordMatched = bcrypt.compareSync(payload.password, existingUser.password);
 
   if (!isPasswordMatched) {
-    return Boom.badRequest('Password incorrect');
+    throw Boom.badRequest('Password incorrect');
   }
 
-  const { _id, ...jwtPayload } = existingUser;
+  const { password: _, ...publicUserData } = existingUser.toObject();
 
-  const accessToken = jwt.sign(jwtPayload, JWT_SECRET);
+  const accessToken = jwt.sign(publicUserData, JWT_SECRET);
 
-  return accessToken;
+  return { accessToken, ...publicUserData };
 };
 
 export const AuthServices = { register, login };

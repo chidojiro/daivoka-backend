@@ -9,9 +9,9 @@ export const AuthRoutes: ServiceRoute = {
     method: 'POST',
     path: '/register',
     handler: async (request, h) => {
-      const newUser = await AuthServices.register(request.payload as CreateUserPayload);
+      const registerResponse = await AuthServices.register(request.payload as CreateUserPayload);
 
-      return h.response(newUser);
+      return h.response(registerResponse);
     },
     options: {
       validate: { payload: Joi.object({ email: Joi.string().email().required(), password: Joi.string().required() }) },
@@ -23,9 +23,9 @@ export const AuthRoutes: ServiceRoute = {
     path: '/login',
     options: { auth: false },
     handler: async (request, h) => {
-      const accessToken = await AuthServices.login(request.payload as LoginPayload);
+      const loginResponse = await AuthServices.login(request.payload as LoginPayload);
 
-      return h.response().code(204).header('set-cookie', `accessToken=${accessToken};HttpOnly;SameSite=Strict`);
+      return h.response(loginResponse);
     },
   },
 };

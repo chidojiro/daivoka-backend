@@ -12,6 +12,8 @@ const server = Hapi.server({
   port: 8080,
 });
 
+server.realm.modifiers.route.prefix = '/api';
+
 const init = async () => {
   await mongoose.connect(MONGO_URI, { dbName: 'main' });
 
