@@ -1,5 +1,5 @@
 import { Routes } from '@/routing/routes';
-// import { server } from '@/routing/server';
+import { server } from '@/routing/server';
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import Joi from 'joi';
 import Hapi from '@hapi/hapi';
@@ -7,10 +7,6 @@ import mongoose from 'mongoose';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const MONGO_URI = process.env.MONGO_URI!;
-
-const server = Hapi.server({
-  port: 8080,
-});
 
 server.realm.modifiers.route.prefix = '/api';
 

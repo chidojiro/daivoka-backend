@@ -1499,6 +1499,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.1.2
     "@commitlint/config-conventional": ^17.1.0
+    "@hapi/boom": ^10.0.0
     "@hapi/eslint-plugin": ^6.0.0
     "@hapi/hapi": ^20.2.2
     "@hapi/jwt": ^3.0.0
