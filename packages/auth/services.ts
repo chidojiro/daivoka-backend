@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@/errors/constants';
 import { UserServices } from '@/user/services';
 import { CreateUserPayload } from '@/user/types';
 import Boom from '@hapi/boom';
@@ -12,7 +13,7 @@ const register = async (payload: CreateUserPayload) => {
   const existingUser = await UserServices.getByEmail(payload.email);
 
   if (existingUser) {
-    throw Boom.badRequest('User already exists');
+    throw Boom.badRequest(ErrorMessage.ALREADY_EXIST);
   }
 
   const encryptedPassword = bcrypt.hashSync(payload.password, SALT_ROUNDS);

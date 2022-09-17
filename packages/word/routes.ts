@@ -6,6 +6,7 @@ import { WordServices } from './services';
 import { Word } from './types';
 import Boom from '@hapi/boom';
 import { nonCaseToKebabCase } from '@/common/utils';
+import { ErrorMessage } from '@/errors/constants';
 
 export const WordRoutes: ServiceRoute = {
   createWord: {
@@ -19,7 +20,7 @@ export const WordRoutes: ServiceRoute = {
 
         return h.response(newWord);
       } catch (e) {
-        if (isDuplicateError(e)) throw Boom.badRequest('Word already exits');
+        if (isDuplicateError(e)) throw Boom.badRequest(ErrorMessage.ALREADY_EXIST);
 
         throw Boom.internal();
       }
