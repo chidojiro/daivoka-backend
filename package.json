@@ -6,7 +6,9 @@
   "scripts": {
     "dev:tsc": "ttsc --watch -p .",
     "dev:serve": "nodemon -r dotenv/config -e js -w lib lib/index.js",
-    "dev": "run-p dev:tsc dev:serve"
+    "dev": "run-p dev:tsc dev:serve",
+    "build": "ttsc",
+    "start": "node lib/index.js"
   },
   "author": "chidojiro",
   "license": "ISC",
