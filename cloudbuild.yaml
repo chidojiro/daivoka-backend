@@ -4,6 +4,9 @@ steps:
     args: ['install']
   - name: node:16.14.0
     entrypoint: npm
+    args: ['run', 'build']
+  - name: node:16.14.0
+    entrypoint: npm
     args: ['run', 'create-env']
     env:
       - 'JWT_SECRET=${_JWT_SECRET}'
