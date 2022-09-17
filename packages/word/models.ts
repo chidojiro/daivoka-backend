@@ -8,6 +8,7 @@ const PronunciationSchema = new mongoose.Schema({
 
 const WordSchema = new mongoose.Schema({
   text: { type: String, required: true, unique: true },
+  slug: { type: String, required: true, unique: true },
   pronunciations: { type: [PronunciationSchema], required: true },
 });
 

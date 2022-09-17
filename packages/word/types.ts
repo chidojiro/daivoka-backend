@@ -16,6 +16,7 @@ export type Meaning = {
 export type Word = {
   _id: string;
   text: string;
+  slug: string;
   pronunciations: Pronunciation[];
   meanings: Meaning[];
 };

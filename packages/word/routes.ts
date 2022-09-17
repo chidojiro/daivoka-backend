@@ -5,14 +5,17 @@ import Joi from 'joi';
 import { WordServices } from './services';
 import { Word } from './types';
 import Boom from '@hapi/boom';
+import { nonCaseToKebabCase } from '@/common/utils';
 
 export const WordRoutes: ServiceRoute = {
   createWord: {
     method: 'POST',
     path: '/words/create',
     handler: async (request, h) => {
+      const payload = request.payload as Omit<WithoutId<Word>, 'slug'>;
+
       try {
-        const newWord = (await WordServices.create(request.payload as WithoutId<Word>)).toObject();
+        const newWord = (await WordServices.create({ ...payload, slug: nonCaseToKebabCase(payload.text) })).toObject();
 
         return h.response(newWord);
       } catch (e) {
@@ -27,9 +30,9 @@ export const WordRoutes: ServiceRoute = {
           text: Joi.string().required(),
           pronunciations: Joi.array().items(
             Joi.object({
-              text: Joi.string().required(),
+              text: Joi.string().required().trim(),
               type: Joi.string().required(),
-              accent: Joi.string().required(),
+              accent: Joi.string().required().trim(),
             })
           ),
         }),
