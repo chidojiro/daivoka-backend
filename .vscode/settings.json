@@ -9,5 +9,5 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.packageManager": "yarn",
   "npm.packageManager": "yarn",
-  "cSpell.words": ["daivoka"]
+  "cSpell.words": ["chidojiro", "daivoka", "gcloud", "printenv", "ttsc"]
 }

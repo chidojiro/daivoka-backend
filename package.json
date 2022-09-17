@@ -8,7 +8,9 @@
     "dev:serve": "nodemon -r dotenv/config -e js -w lib lib/index.js",
     "dev": "run-p dev:tsc dev:serve",
     "build": "ttsc",
-    "start": "node lib/index.js"
+    "start": "node -r dotenv/config lib/index.js",
+    "deploy": "npm run build && gcloud app deploy ./app.yml",
+    "create-env": "printenv > .env"
   },
   "author": "chidojiro",
   "license": "ISC",
