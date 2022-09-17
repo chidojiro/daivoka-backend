@@ -10,5 +10,5 @@ steps:
       - 'MONGO_URI=${_MONGO_URI}'
       - 'SALT_ROUNDS=${_SALT_ROUNDS}'
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy']
+    args: ['app', 'deploy', './app.yml']
 timeout: '1600s'
