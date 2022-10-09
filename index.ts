@@ -1,12 +1,8 @@
+import { JWT_SECRET, MONGO_URI } from '@/env/constants';
 import { Routes } from '@/routing/routes';
 import { server } from '@/routing/server';
 import { Request, ResponseToolkit } from '@hapi/hapi';
-import Joi from 'joi';
-import Hapi from '@hapi/hapi';
 import mongoose from 'mongoose';
-
-const JWT_SECRET = process.env.JWT_SECRET;
-const MONGO_URI = process.env.MONGO_URI!;
 
 server.realm.modifiers.route.prefix = '/api';
 

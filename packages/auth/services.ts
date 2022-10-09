@@ -1,3 +1,4 @@
+import { JWT_SECRET, SALT_ROUNDS } from '@/env/constants';
 import { ErrorMessage } from '@/errors/constants';
 import { UserServices } from '@/user/services';
 import { CreateUserPayload } from '@/user/types';
@@ -5,9 +6,6 @@ import Boom from '@hapi/boom';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { LoginPayload } from './types';
-
-const JWT_SECRET = process.env.JWT_SECRET!;
-const SALT_ROUNDS = +process.env.SALT_ROUNDS!;
 
 const register = async (payload: CreateUserPayload) => {
   const existingUser = await UserServices.getByEmail(payload.email);

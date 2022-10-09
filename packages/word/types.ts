@@ -1,8 +1,7 @@
-export type Accent = 'us' | 'uk';
+export type Accent = 'US' | 'UK';
 
-export type Pronunciation = {
+export type IPA = {
   text: string;
-  type: string;
   accent: Accent;
 };
 
@@ -17,6 +16,6 @@ export type Word = {
   _id: string;
   text: string;
   slug: string;
-  pronunciations: Pronunciation[];
+  ipas: IPA[];
   meanings: Meaning[];
 };
