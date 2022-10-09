@@ -1,21 +1,15 @@
-export type Accent = 'US' | 'UK';
-
-export type IPA = {
-  text: string;
-  accent: Accent;
-};
-
-export type Meaning = {
-  _id: string;
-  text: string;
-  examples: string[];
-  illustration?: string;
-};
+import { Id } from '@/common/types';
+import { MeaningGroup } from '@/meaning/types';
 
 export type Word = {
-  _id: string;
+  _id: Id;
   text: string;
   slug: string;
-  ipas: IPA[];
-  meanings: Meaning[];
+  meaningGroupIds: string[];
 };
+
+export type EnhancedWord = Word & { meaningGroups: MeaningGroup[] };
+
+export enum WordErrorMessage {
+  NOT_FOUND = 'NOT_FOUND',
+}

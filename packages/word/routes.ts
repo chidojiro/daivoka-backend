@@ -19,7 +19,7 @@ export const WordRoutes: ServiceRoute = {
     handler: async (request, h) => {
       const word = await WordServices.getBySlug(request.params.slug);
 
-      return h.response(word?.toObject());
+      return h.response(word);
     },
   },
   createWord: {
