@@ -28,4 +28,20 @@ export const MeaningRoutes: ServiceRoute = {
       return h.response(word);
     },
   },
+  deleteMeaningGroup: {
+    method: 'DELETE',
+    path: '/words/{wordId}/meaning-group/{meaningGroupId}',
+    options: {
+      validate: {
+        params: Joi.object({ wordId: Joi.string(), meaningGroupId: Joi.string() }),
+      },
+    },
+    handler: async (request, h) => {
+      const meaningGroupId = request.params.meaningGroupId;
+
+      const word = await MeaningServices.deleteGroup(meaningGroupId);
+
+      return h.response(word);
+    },
+  },
 };

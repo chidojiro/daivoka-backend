@@ -1,5 +1,9 @@
 import { Id } from '@/common/types';
 
+export enum MeaningErrorMessage {
+  GROUP_NOT_FOUND = 'MEANING_GROUP_NOT_FOUND',
+}
+
 export enum _AccentEnum {
   US,
   UK,
