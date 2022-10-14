@@ -34,13 +34,11 @@ const deleteGroup = async (id: string) => {
     { new: true }
   ).lean();
 
-  console.log(word);
-
   if (!word) {
     throw Boom.notFound(WordErrorMessage.NOT_FOUND);
   }
 
-  return word;
+  return WordServices.enhance(word);
 };
 
 const getGroupsByIds = async (ids: Id[]) => {

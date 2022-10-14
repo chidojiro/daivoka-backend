@@ -15,9 +15,18 @@ const wordValidator = Joi.object<WithoutId<Word>>({
 export const WordRoutes: ServiceRoute = {
   getBySlug: {
     method: 'GET',
-    path: '/words/{slug}',
+    path: '/words/slugs/{slug}',
     handler: async (request, h) => {
       const word = await WordServices.getBySlug(request.params.slug);
+
+      return h.response(word);
+    },
+  },
+  getById: {
+    method: 'GET',
+    path: '/words/{wordId}',
+    handler: async (request, h) => {
+      const word = await WordServices.get(request.params.wordId);
 
       return h.response(word);
     },
