@@ -1,6 +1,7 @@
-import { Id } from '@/common/types';
+import { Id, WithoutId } from '@/common/types';
 
 export enum MeaningErrorMessage {
+  NOT_FOUND = 'MEANING_NOT_FOUND',
   GROUP_NOT_FOUND = 'MEANING_GROUP_NOT_FOUND',
 }
 
@@ -27,17 +28,13 @@ export enum _MeaningTypeEnum {
 
 export type MeaningType = keyof typeof _MeaningTypeEnum;
 
-export type CreateMeaningGroupPayload = {
-  wordId: string;
-  type: MeaningType;
-  ipas: IPA[];
-};
-
 export type Meaning = {
   _id: Id;
   text: string;
   examples: string[];
-  illustration?: string;
+  groupId: string;
+  wordId: string;
+  illustratingImage?: string;
 };
 
 export type MeaningGroup = {
@@ -46,3 +43,7 @@ export type MeaningGroup = {
   ipas: IPA[];
   wordId: string;
 };
+
+export type CreateMeaningGroupPayload = WithoutId<MeaningGroup>;
+
+export type CreateMeaningPayload = WithoutId<Meaning>;

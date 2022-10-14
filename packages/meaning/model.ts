@@ -9,10 +9,20 @@ const IpaSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const meaningGroupSchema = new mongoose.Schema({
+const MeaningGroupSchema = new mongoose.Schema({
   wordId: { type: 'string', required: true },
   type: { type: 'string', enum: meaningTypes, required: true },
   ipas: { type: [IpaSchema], required: true },
 });
 
-export const MeaningGroupModel = mongoose.model('meaning-group', meaningGroupSchema);
+export const MeaningGroupModel = mongoose.model('meaning-group', MeaningGroupSchema);
+
+const MeaningSchema = new mongoose.Schema({
+  text: { type: 'string', required: true },
+  examples: { type: ['string'] },
+  illustratingImage: { type: 'string' },
+  groupId: { type: 'string', required: true },
+  wordId: { type: 'string', required: true },
+});
+
+export const MeaningModel = mongoose.model('meaning', MeaningSchema);
