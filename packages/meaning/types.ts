@@ -44,4 +44,5 @@ export type MeaningGroup = {
   _id: Id;
   type: MeaningType;
   ipas: IPA[];
+  wordId: string;
 };

@@ -31,8 +31,14 @@ const getBySlug = async (slug: string) => {
   return enhance(word);
 };
 
-const updateBySlug = (slug: string, data: Word) => {
-  return WordModel.findOneAndUpdate({ slug }, data);
+const update = async (id: string, data: Word) => {
+  const { _id, ...updatePayload } = data;
+
+  const updatedWord = await WordModel.findOneAndUpdate({ _id: id }, updatePayload).lean();
+
+  if (!updatedWord) throw Boom.notFound(WordErrorMessage.NOT_FOUND);
+
+  return updatedWord;
 };
 
-export const WordServices = { get, create, getBySlug, updateBySlug, enhance };
+export const WordServices = { get, create, getBySlug, update, enhance };

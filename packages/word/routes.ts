@@ -55,17 +55,16 @@ export const WordRoutes: ServiceRoute = {
   },
   updateWord: {
     method: 'PUT',
-    path: '/words/{slug}',
+    path: '/words/{wordId}',
     options: {
       validate: {
         payload: wordValidator,
       },
       handler: async (request, h) => {
-        const payload = request.payload as Omit<WithoutId<Word>, 'slug'>;
+        const wordId = request.params.wordId as string;
+        const payload = request.payload as Word;
 
-        const updatedWord = (
-          await WordServices.create({ ...payload, slug: nonCaseToKebabCase(payload.text) })
-        ).toObject();
+        const updatedWord = await WordServices.update(wordId, payload);
 
         return h.response(updatedWord);
       },

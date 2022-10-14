@@ -1,3 +1,4 @@
+import { MeaningGroup } from '@/meaning/types';
 import { Id } from '@/common/types';
 import { WordModel } from '@/word/models';
 import { WordServices } from '@/word/services';
@@ -19,6 +20,16 @@ const createGroup = async (payload: CreateMeaningGroupPayload) => {
   }
 
   return WordServices.enhance(word);
+};
+
+const updateGroup = async (id: string, data: MeaningGroup) => {
+  const { _id: _, ...updatePayload } = data;
+
+  await MeaningGroupModel.updateOne({ _id: id }, updatePayload);
+
+  const word = await WordServices.get(updatePayload.wordId);
+
+  return word;
 };
 
 const deleteGroup = async (id: string) => {
@@ -46,7 +57,8 @@ const getGroupsByIds = async (ids: Id[]) => {
 };
 
 export const MeaningServices = {
-  createGroup,
   getGroupsByIds,
+  createGroup,
+  updateGroup,
   deleteGroup,
 };
